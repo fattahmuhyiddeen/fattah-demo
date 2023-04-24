@@ -13,7 +13,7 @@ export default ({ data = [], selected = '', onChange, ...props }: SelectProps) =
 
   return (
     <>
-      <Button {...props} onPress={() => setShow(true)} style={styles.button}>
+      <Button {...props} onPress={() => setShow(true)} style={{ ...styles.button, ...(selected ? styles.selected : styles.unselected) }}>
         <Text children={data.find((d) => d.value == selected)?.label || '+'} />
       </Button>
       <Modal
@@ -44,7 +44,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-end'
   },
-  button:{ padding:10 },
+  button: { padding: 10 },
+  unselected: {
+    borderStyle: 'dashed',
+    borderWidth: 1,
+    borderRadius: 10,
+  },
+  selected: {},
   modalBody: {
     margin: 20,
     width: '90%',
