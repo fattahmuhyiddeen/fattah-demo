@@ -9,8 +9,6 @@ import Select from './components/Select';
 import Button from './components/Button';
 import data from './data';
 
-const mapData = (key: 'state' | 'city' | 'district') => data.reduce((a: string[], { [key]: d }) => a.includes(d) ? a : [...a, d], []).map(d => ({ label: d, value: d }))
-
 function App(): JSX.Element {
   const [state, setState] = useState('');
   const [district, setDistrict] = useState('');
@@ -38,15 +36,17 @@ function App(): JSX.Element {
     setCity('');
   }
 
+const filterData = (key: 'state' | 'city' | 'district') => data.filter(d => key === 'state' || key === 'district' ? d.state === state : d.district === district).reduce((a: string[], { [key]: d }) => a.includes(d) ? a : [...a, d], []).map(d => ({ label: d, value: d }))
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ flexDirection: 'row' }}>
         {!!state ? <Button onPress={clearFilter}><Text>Clear filter</Text></Button> : <Text>Filter</Text>}
       </View>
       <View style={{ flexDirection: 'row', gap: 5, marginBottom: 30 }}>
-        <Select data={mapData('state')} onChange={changeState} selected={state} />
-        {!!state && <Select data={mapData('district')} onChange={changeDistrict} selected={district} />}
-        {!!district && <Select data={mapData('city')} onChange={setCity} selected={city} />}
+        <Select data={filterData('state')} onChange={changeState} selected={state} />
+        {!!state && <Select data={filterData('district')} onChange={changeDistrict} selected={district} />}
+        {!!district && <Select data={filterData('city')} onChange={setCity} selected={city} />}
         <Button style={styles.searchButton} onPress={search}><Text>Search</Text></Button>
       </View>
       <Text>{searchResult}</Text>
