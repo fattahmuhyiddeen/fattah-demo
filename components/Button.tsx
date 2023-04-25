@@ -1,6 +1,5 @@
-/* This component is to make Tinted Button when touched (like in waze) */
 import React, { useRef } from "react";
-import { Alert, Animated, Pressable, PressableProps } from "react-native";
+import { Animated, Pressable, PressableProps } from "react-native";
 
 const Root = Animated.createAnimatedComponent(Pressable);
 

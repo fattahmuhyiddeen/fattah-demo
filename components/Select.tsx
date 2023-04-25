@@ -48,9 +48,12 @@ const styles = StyleSheet.create({
   unselected: {
     borderStyle: 'dashed',
     borderWidth: 1,
-    borderRadius: 10,
+    borderRadius: 20,
   },
-  selected: {},
+  selected: {
+    backgroundColor:'orange',
+    borderRadius:20,
+  },
   modalBody: {
     margin: 20,
     width: '90%',
