@@ -36,7 +36,7 @@ function App(): JSX.Element {
     setCity('');
   }
 
-const filterData = (key: 'state' | 'city' | 'district') => data.filter(d => key === 'state' || key === 'district' ? d.state === state : d.district === district).reduce((a: string[], { [key]: d }) => a.includes(d) ? a : [...a, d], []).map(d => ({ label: d, value: d }))
+const filterData = (key: 'state' | 'city' | 'district') => data.filter(d => key === 'state' || (key === 'district' ? d.state === state : d.district === district)).reduce((a: string[], { [key]: d }) => a.includes(d) ? a : [...a, d], []).map(d => ({ label: d, value: d }))
 
   return (
     <SafeAreaView style={styles.container}>
